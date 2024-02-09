@@ -1,0 +1,135 @@
+:root {
+    --color-dark-blue: #171622;
+    --color-dark-blue-2: #1e1d2d;
+    --color-dark-blue-5: #393564;
+}
+
+nav {
+    background-color: var(--color-dark-blue-2);
+    outline: 1px solid white;
+    min-height: 2rem;
+    margin: 0 auto;
+    color: white;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: center;
+}
+
+nav h1 {
+    margin-top: 0;
+}
+
+div#SettingsLibrary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div#SettingsLibrary hr {
+    height: 7rem;
+    width: 1px;
+    background-color: white;
+}
+
+table {
+    margin: auto;
+    font-size: larger;
+    text-align: left;
+}
+
+table input,
+table select {
+    height: 2rem;
+    width: 15rem;
+    padding-block: 0;
+    padding-inline: 0;
+    border-width: 0;
+    border-spacing: 0;
+    margin: 0;
+    font-size: 1rem;
+}
+
+input[type="color"] {
+    height: 2rem;
+    width: 2rem;
+    inline-size: 2rem;
+    block-size: 2rem;
+    padding: 0;
+    margin-left: 1rem;
+    cursor: pointer;
+    visibility: hidden;
+}
+
+td:has(input[type="color"]) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+td:has(option[data-original="custom"]:checked) input[type="color"] {
+    visibility: visible !important;
+}
+
+td#lockRatio>div {
+    width: 2rem;
+    height: 2rem;
+}
+
+td#lockRatio svg {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    display: inline-block;
+    transition: background-color .5s ease-out,
+        border-radius .5s ease-out;
+}
+
+td#lockRatio svg:hover {
+    background-color: var(--color-dark-blue-5);
+    border-radius: 50px 0;
+}
+
+td#lockRatio.active svg#unlocked,
+td#lockRatio svg#locked {
+    display: none;
+}
+
+td#lockRatio.active svg#locked,
+td#lockRatio svg#unlocked {
+    display: block;
+}
+
+td#lockRatio svg path {
+    fill: white;
+}
+
+input[type="button"] {
+    cursor: pointer;
+}
+
+input[type="button"]:hover {
+    background-color: var(--color-dark-blue);
+    color: white;
+    border: 1px solid white;
+}
+
+span[id*="Preview"] {
+    display: inline-block;
+    width:1rem;
+    position: relative;
+    bottom: .5rem;
+}
+
+main {
+    height: calc(90vh - 10rem);
+    margin: 2rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: 1px solid white;
+    background-color: var(--color-dark-blue-2);
+}
+
+canvas {
+    outline: 1px solid white;
+    cursor: crosshair;
+}

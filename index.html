@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Falling sand simulation</title>
+    <link rel="stylesheet" href="index.css">
+    <script defer src="scripts/eventsService/toggleRatioLock.js"></script>
+    <script defer src="scripts/eventsService/colorPickerLink.js"></script>
+    <script type="module" defer src="main.js"></script>
+</head>
+
+<body style="background-color: #171622;">
+    <nav>
+        <h1>Settings</h1>
+        <div id="SettingsLibrary">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label class="settingsLabel" for="rowsCount"> Number of rows: </label>
+                        </td>
+                        <td>
+                            <input type="number" value="64" placeholder="64" name="rowsCount" id="rowsCount">
+                        </td>
+                        <td id="lockRatio" class="active" rowspan="2">
+                            <svg id="unlocked" width="512" height="512" x="0" y="0" viewBox="0 0 472.951 472.951"
+                                style="enable-background:new 0 0 512 512" xml:space="preserve">
+                                <g>
+                                    <path
+                                        d="M462.557 77.627c-14.323-25.556-41.488-41.423-70.889-41.423a81.03 81.03 0 0 0-39.602 10.364l-152.557 85.635 17.55 31.279 152.565-85.635a45.24 45.24 0 0 1 22.069-5.779c16.428 0 31.596 8.852 39.594 23.11 5.909 10.535 7.356 22.752 4.072 34.408-3.268 11.656-10.876 21.346-21.411 27.255l-138.291 77.604c-2.634-16.851-10.494-32.392-22.793-44.699-21.687-21.663-56.063-29.328-84.935-18.964l-12.485 4.495 12.128 33.734 12.534-4.471c16.127-5.869 35.319-1.496 47.406 10.567 6.974 6.982 11.388 15.826 12.786 25.41a36.132 36.132 0 0 1-1.731-.447c-11.681-3.284-21.354-10.9-27.271-21.476l-6.519-11.518-31.303 17.59 6.56 11.518c10.6 18.915 27.93 32.571 48.836 38.44.723.187 1.455.39 2.187.561a45.75 45.75 0 0 1-3.536 3.983l-114.32 114.328c-8.551 8.543-19.931 13.241-32.035 13.241-12.112 0-23.492-4.698-32.027-13.241s-13.233-19.907-13.233-32.027c0-12.112 4.698-23.483 13.233-32.018l99.291-99.282-25.369-25.369-99.282 99.282C8.446 319.427 0 339.806 0 361.468c0 21.679 8.446 42.049 23.776 57.396 15.339 15.339 35.709 23.768 57.388 23.768s42.049-8.429 57.388-23.768l114.345-114.32a81.353 81.353 0 0 0 18.842-29.71c6.625-1.764 12.924-4.3 18.777-7.6l140.99-79.115c18.875-10.608 32.514-27.946 38.375-48.828 5.868-20.891 3.267-42.798-7.324-61.664zM173.171 141.769c4.503-.821 7.511-5.145 6.69-9.657L162.758 37.17c-.821-4.519-5.162-7.527-9.665-6.722-4.511.821-7.527 5.145-6.706 9.673l17.111 94.925c.813 4.529 5.146 7.528 9.673 6.723zM43.561 191.776l94.934-17.119c4.519-.821 7.527-5.145 6.706-9.657-.821-4.528-5.145-7.543-9.649-6.722L40.61 175.405c-4.503.797-7.519 5.145-6.698 9.657.805 4.52 5.146 7.527 9.649 6.714z"
+                                        data-original="#010002"></path>
+                                </g>
+                            </svg>
+                            <svg id="locked" width="512" height="512" x="0" y="0" viewBox="0 0 310.217 310.217"
+                                style="enable-background:new 0 0 512 512" xml:space="preserve">
+                                <g>
+                                    <path
+                                        d="M295.042 15.17C285.263 5.39 272.241 0 258.356 0c-13.864 0-26.891 5.385-36.665 15.159l-71.192 71.197c-13.663 13.668-18.21 33.347-13.152 51.002a51.835 51.835 0 0 0-14.343-2.029c-13.853 0-26.874 5.385-36.643 15.17l-71.186 71.176C5.396 231.449 0 244.475 0 258.339c0 13.886 5.385 26.907 15.17 36.686 9.79 9.79 22.822 15.191 36.686 15.191 13.88 0 26.907-5.401 36.676-15.191l71.186-71.176c13.663-13.663 18.21-33.352 13.157-51.008a52.565 52.565 0 0 0 14.37 2.018c13.837 0 26.853-5.385 36.621-15.159l71.176-71.165c9.774-9.774 15.175-22.806 15.175-36.692s-5.406-26.905-15.175-36.673zm-79.943 98.996c2.556-2.529 3.976-5.912 4.009-9.627-.016-3.552-1.409-6.902-3.949-9.48-4.944-4.96-14.12-4.96-19.064 0l-34.913 34.902c-2.437-9.018-.016-18.906 6.995-25.917l71.197-71.186c10.057-10.062 27.804-10.16 37.976.005 10.47 10.47 10.47 27.511 0 37.981l-71.186 71.181c-6.652 6.663-16.66 9.35-25.852 6.94l34.787-34.799zM51.823 285.192c-7.169 0-13.897-2.785-18.95-7.849-5.069-5.053-7.854-11.797-7.854-18.999 0-7.169 2.785-13.913 7.854-18.977l71.165-71.159c5.069-5.075 11.814-7.865 18.982-7.865 2.322 0 4.645.299 6.886.897l-37.062 37.062a13.425 13.425 0 0 0-3.949 9.524c0 3.552 1.382 6.913 3.954 9.556 4.988 4.971 14.158 4.911 19.053-.016l37.111-37.111c2.448 9.018.016 18.906-6.995 25.917l-71.176 71.17c-5.064 5.053-11.797 7.849-18.961 7.849l-.027 8.082.005-8.082h-.036z"
+                                        data-original="#010002"></path>
+                                </g>
+                            </svg>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <label class="settingsLabel" for="colsCount"> Number of columns: </label>
+                        </td>
+                        <td>
+                            <input type="number" value="64" placeholder="64" name="colsCount" id="colsCount">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="settingsLabel" for="sandColorMode"> Color mode - sand: </label>
+                        </td>
+                        <td>
+                            <select name="sandColorMode" id="sandColorMode">
+                                <option value="#FFFFFF" selected> White (default) </option>
+                                <option value="#000000"> Black </option>
+                                <option value="#C2B280"> Sand color </option>
+                                <option value="Rainbow"> Rainbow </option>
+                                <option value="Custom" data-original="custom"> Custom color </option>
+                            </select>
+                            <input value="#FFFFFF" type="color" name="sandColorModeInput" id="sandColorModeInput">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="settingsLabel" for="canvasColorMode"> Color mode - canvas: </label>
+                        </td>
+                        <td>
+                            <select name="canvasColorMode" id="canvasColorMode">
+                                <option value="#000000" selected> Black (default) </option>
+                                <option value="#FFFFFF"> White </option>
+                                <option value="Custom" data-original="custom"> Custom </option>
+                            </select>
+                            <input value="#000000" type="color" name="canvasColorModeInput" id="canvasColorModeInput">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <hr />
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label class="settingsLabel" for="tickTimer"> Time per tick (mills): </label>
+                        </td>
+                        <td>
+                            <input type="number" value="50" placeholder="50" name="tickTimer" id="tickTimer">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="settingsLabel" for="tileSize"> Sand grain size (pixels):</label>
+                        </td>
+                        <td>
+                            <span id="tileSizePreview">10</span>
+                            <input type="range" step="3" value="10" placeholder="10" name="tileSize" id="tileSize"
+                                oninput="document.querySelector('span#tileSizePreview').innerText = this.value;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label class="settingsLabel" for="spawnAreaSize"> Sand spawn area diameter (pixels):</label>
+                        </td>
+                        <td>
+                            <span id="spawnAreaSizePreview">6</span>
+                            <input type="range" step="3" value="6" min="0" max="90" placeholder="5" name="spawnAreaSize"
+                                id="spawnAreaSize"
+                                oninput="document.querySelector('span#spawnAreaSizePreview').innerText = this.value;">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <input type="button" value="Save values" id="saveValues">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <input type="button" value="Clear Canvas" id="clearCanvas">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </nav>
+    <main>
+        <canvas height="896" width="1600"></canvas>
+    </main>
+</body>
+
+</html>
